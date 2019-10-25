@@ -63,7 +63,8 @@ int main() {
 	int numGPUs = 1;
 	int randSeed = 42;
 	CARLsim sim("hello world", CPU_MODE, USER, numGPUs, randSeed);
-
+	// CARLsim sim("hello world", GPU_MODE, USER, 0, randSeed);
+	
 	// configure the network
 	// set up a COBA two-layer network with gaussian connectivity
 	Grid3D gridIn(13,9,1); // pre is on a 13x9 grid

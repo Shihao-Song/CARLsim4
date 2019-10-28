@@ -95,7 +95,8 @@ SNN::~SNN() {
 short int SNN::connect(int grpId1, int grpId2, const std::string& _type, float initWt, float maxWt, float prob,
 						uint8_t minDelay, uint8_t maxDelay, RadiusRF radius,
 						float _mulSynFast, float _mulSynSlow, bool synWtType) {
-						//const std::string& wtType
+					//const std::string& wtType
+
 	int retId=-1;
 	assert(grpId1 < numGroups);
 	assert(grpId2 < numGroups);
@@ -838,6 +839,8 @@ int SNN::runNetwork(int _nsec, int _nmsec, bool printRunSummary) {
 	// if nsec=0, simTimeMs=10, we need to run the simulator for 10 timeStep;
 	// if nsec=1, simTimeMs=10, we need to run the simulator for 1*1000+10, time Step;
 	for(int i = 0; i < runDurationMs; i++) {
+		printf("Time: %d; ", i);
+
 		advSimStep();
 		//KERNEL_INFO("Executed an advSimStep!");
 
@@ -2499,7 +2502,7 @@ void SNN::globalStateUpdate() {
 			}
 		}
 	}
-
+	
 	#if !defined(WIN32) && !defined(WIN64) && !defined(__APPLE__) // Linux or MAC
 		// join all the threads
 		for (int i=0; i<threadCount; i++){
@@ -2574,7 +2577,7 @@ void SNN::updateWeights() {
 		ThreadStruct argsThreadRoutine[numCores + 1]; // same as above, +1 array size
 		int threadCount = 0;
 	#endif
-
+	// KERNEL_INFO("[Hacking] Updated weights.");
 	for (int netId = 0; netId < MAX_NET_PER_SNN; netId++) {
 		if (!groupPartitionLists[netId].empty()) {
 			if (netId < CPU_RUNTIME_BASE) // GPU runtime

@@ -67,12 +67,30 @@ int main() {
 	
 	// configure the network
 	// set up a COBA two-layer network with gaussian connectivity
-	Grid3D gridIn(13,9,1); // pre is on a 13x9 grid
-	Grid3D gridOut(3,3,1); // post is on a 3x3 grid
-	int gin=sim.createSpikeGeneratorGroup("input", gridIn, EXCITATORY_NEURON);
-	int gout=sim.createGroup("output", gridOut, EXCITATORY_NEURON);
+	// Grid3D gridIn(13,9,1); // pre is on a 13x9 grid
+	// Grid3D gridOut(3,3,1); // post is on a 3x3 grid
+	// int gin=sim.createSpikeGeneratorGroup("input", gridIn, EXCITATORY_NEURON);
+	// int gout=sim.createGroup("output", gridOut, EXCITATORY_NEURON);
+	
+	int gin=sim.createSpikeGeneratorGroup("input", 5, EXCITATORY_NEURON);
+	int gout=sim.createGroup("output", 1, EXCITATORY_NEURON);
+	
+	// Specify the Izhikevich parameters, in this case for class 1 excitability 
+	// (regular spiking) neuron.
 	sim.setNeuronParameters(gout, 0.02f, 0.2f, -65.0f, 8.0f);
-	sim.connect(gin, gout, "gaussian", RangeWeight(0.05), 1.0f, RangeDelay(1), RadiusRF(3,3,1));
+	/*
+	sim.connect(gin, gout,
+		"gaussian", // Gaussian Connectivity
+		RangeWeight(0.05), // All weights are fixed
+		1.0f, // Connection Probability (100%)
+		RangeDelay(1), // Axon Delay, fixed 1ms
+		RadiusRF(3,3,1)); // Gaussian RF with radius of 10 
+	*/
+	sim.connect(gin, gout, 
+		"full", // Connects all neurons in the pre-synaptic group to all neurons in the post-synaptic group.
+		RangeWeight(0.05), // TODO, we have fixed the weights so far
+		1.0f, // 100% connection prob
+		RangeDelay(1)); // Axon Delay
 	sim.setConductances(true);
 	// sim.setIntegrationMethod(FORWARD_EULER, 2);
 
@@ -80,6 +98,7 @@ int main() {
 	// build the network
 	watch.lap("setupNetwork");
 	sim.setupNetwork();
+//	exit(0);
 
 	// set some monitors
 	sim.setSpikeMonitor(gin,"DEFAULT");
@@ -87,8 +106,9 @@ int main() {
 	sim.setConnectionMonitor(gin,gout,"DEFAULT");
 
 	//setup some baseline input
-	PoissonRate in(gridIn.N);
-	in.setRates(30.0f);
+	// PoissonRate in(gridIn.N);
+	PoissonRate in(5);
+	in.setRates(30.0f); // 30Hz
 	sim.setSpikeRate(gin,&in);
 
 

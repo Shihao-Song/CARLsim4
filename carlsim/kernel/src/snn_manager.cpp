@@ -2025,6 +2025,7 @@ void SNN::SNNinit() {
 	KERNEL_INFO("Starting CARLsim simulation \"%s\" in %s mode",networkName_.c_str(),
 		loggerMode_string[loggerMode_]);
 	KERNEL_INFO("Random number seed: %d",randSeed_);
+	// KERNEL_INFO("[Hacking] Looks like we are in the right place... \n");
 
 	time_t rawtime;
 	struct tm * timeinfo;
@@ -3470,7 +3471,7 @@ void SNN::collectGlobalNetworkConfigP() {
 // time of firing these are the mostly costly arrays so dense packing is essential to minimize wastage of space
 void SNN::compileSNN() {
 	KERNEL_DEBUG("Beginning compilation of the network....");
-
+	
 	// compile (update) group and connection configs according to their mutual information
 	// update GroupConfig::MaxDelay GroupConfig::FixedInputWts
 	// assign GroupConfig::StartN and GroupConfig::EndN

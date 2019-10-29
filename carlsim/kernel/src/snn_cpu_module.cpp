@@ -973,8 +973,8 @@ float SNN::getCompCurrent(int netid, int lGrpId, int lneurId, float const0, floa
 					{	
 						// update vpos and upos for the current neuron
 						v_next = v + dvdtIzhikevich4(v, u, totalCurrent, timeStep);
-						printf("Loop: %d\n", j);
-						printf("V: %f\n", v_next);
+						// printf("Loop: %d\n", j);
+						// printf("V: %f\n", v_next);
 						if (v_next > 30.0f) {
 							v_next = 30.0f; // break the loop but evaluate u[i]
 							runtimeData[netId].curSpike[lNId] = true;

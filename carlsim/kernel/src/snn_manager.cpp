@@ -839,7 +839,7 @@ int SNN::runNetwork(int _nsec, int _nmsec, bool printRunSummary) {
 	// if nsec=0, simTimeMs=10, we need to run the simulator for 10 timeStep;
 	// if nsec=1, simTimeMs=10, we need to run the simulator for 1*1000+10, time Step;
 	for(int i = 0; i < runDurationMs; i++) {
-		printf("\nTime: %d ms \n", i);
+//		printf("\nTime: %d ms \n", i);
 
 		advSimStep();
 		//KERNEL_INFO("Executed an advSimStep!");

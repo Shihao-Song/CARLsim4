@@ -65,15 +65,17 @@ int main() {
 	// create a network on GPU
 	int numGPUs = 1;
 	int randSeed = 42;
-	CARLsim sim("hello world", CPU_MODE, USER, numGPUs, randSeed);
-	
+	CARLsim sim("transform", CPU_MODE, USER, numGPUs, randSeed);
+
+	// ---------------- Original Network ---------------	
 	// configure the network
 	// set up a COBA two-layer network with gaussian connectivity
 	std::vector<int> gins;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		std::string in_name = "input_" + std::to_string(i);
 		gins.push_back(sim.createSpikeGeneratorGroup(in_name, 1, EXCITATORY_NEURON));
+		// gins.push_back(sim.createGroup(in_name, 1, EXCITATORY_NEURON));
 	}
 	int gout=sim.createGroup("output", 1, EXCITATORY_NEURON);
 	
@@ -82,8 +84,12 @@ int main() {
 	// TODO, ask whether these numbers matter.
 	// FIXME. I will keep these numbers for now.
 	sim.setNeuronParameters(gout, 0.02f, 0.2f, -65.0f, 8.0f);
-	std::vector<float> weights = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
-	for (int i = 0; i < 5; i++)
+	std::vector<float> weights = {0.1f, 0.1f, 0.0f};
+	float ALPHA_LTP = 0.10f;
+        float ALPHA_LTD = -0.14f;
+        float TAU_LTP = 20.0f;
+        float TAU_LTD = 20.0f;
+	for (int i = 0; i < 3; i++)
 	{
 		sim.connect(gins[i], gout, 
 			"full", // Connects all neurons in the pre-synaptic group to all neurons in the post-synaptic group.
@@ -93,21 +99,34 @@ int main() {
 			RadiusRF(-1), 
 			SYN_PLASTIC);
 	}
+	// sim.setESTDP(gout, true, STANDARD, ExpCurve(ALPHA_LTP/100, TAU_LTP, ALPHA_LTD/100, TAU_LTP));
 	sim.setConductances(true);
 
+	// ---------------- Transformed Network ---------------	
+	
+	
 	// Config spiketimes
 	std::vector<std::vector<int>> spikeTimes = {{5},
 						{10},
-						{15},
-						{20},
-						{25}};
+						{15}};
+	/*
+	// Get more spikes
+	for (int i = 0; i < 3; i++)	
+	{
+		for (int j = 1; j < 100; j++)
+		{
+			spikeTimes[i].push_back(100 * j + 5 * i);
+		}
+	}
+	*/
+
 	std::vector<SpikeGeneratorFromVector> SGVs;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		SGVs.emplace_back(spikeTimes[i]);
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		sim.setSpikeGenerator(gins[i], &(SGVs[i]));
 	}
@@ -120,7 +139,7 @@ int main() {
 	std::vector<SpikeMonitor*> spkMons;
 
 	SpikeMonitor* outMon = sim.setSpikeMonitor(gout,"DEFAULT");
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		spkMons.push_back(sim.setSpikeMonitor(gins[i],"DEFAULT"));
 		sim.setConnectionMonitor(gins[i],gout,"DEFAULT");
@@ -128,18 +147,18 @@ int main() {
 	
 	// ---------------- RUN STATE -------------------
 	watch.lap("runNetwork");
-	for (int i = 0; i < 5; i++) { spkMons[i]->startRecording(); }
+	for (int i = 0; i < 3; i++) { spkMons[i]->startRecording(); }
 	outMon->startRecording();
 
 	// run for a total of 10 seconds
 	// at the end of each runNetwork call, SpikeMonitor stats will be printed
-	//for (int i=0; i<2; i++) {
+	for (int i=0; i<1; i++) {
 		sim.runNetwork(1,0);
-	//}
-	for (int i = 0; i < 5; i++) { spkMons[i]->stopRecording(); }
+	}
+	for (int i = 0; i < 3; i++) { spkMons[i]->stopRecording(); }
 	outMon->stopRecording();
 
-	for (int i = 0; i < 5; i++) { spkMons[i]->print(); }
+	for (int i = 0; i < 3; i++) { spkMons[i]->print(); }
 	outMon->print();
 
 	// print stopwatch summary

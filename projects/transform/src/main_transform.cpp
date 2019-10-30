@@ -82,7 +82,6 @@ int main() {
 	
 		sim.setNeuronParameters(gouts[i], 0.02f, 0.2f, -65.0f, 8.0f);
 	}
-        std::vector<float> weights = {0.1f, 0.1f, 0.1f};
 
 	// input[0] -> output[0]
 	sim.connect(gins[0], gouts[0],
@@ -105,7 +104,7 @@ int main() {
 	// output[0] -> output[1]
 	sim.connect(gouts[0], gouts[1],
                 "full",
-                RangeWeight(0.1f),
+                RangeWeight(0.2f),
                 1.0f,
                 RangeDelay(1),
                 RadiusRF(-1),
@@ -164,11 +163,17 @@ int main() {
 	watch.lap("runNetwork");
 	for (int i = 0; i < spkMons.size(); i++) { spkMons[i]->startRecording(); }
 
-	// run for a total of 10 seconds
-	// at the end of each runNetwork call, SpikeMonitor stats will be printed
-	for (int i=0; i<1; i++) {
-		sim.runNetwork(1,0);
-	}
+	// run for a total of () seconds
+	sim.setExternalCurrent(gouts[0], 2.0f);
+	sim.runNetwork(0,10);
+	sim.setExternalCurrent(gouts[0], 0.0f);
+	
+	sim.setExternalCurrent(gouts[1], 4.0f);
+	sim.runNetwork(0,5);
+	sim.setExternalCurrent(gouts[1], 0.0f);
+	
+	sim.runNetwork(1,0);
+
 	for (int i = 0; i < spkMons.size(); i++) { spkMons[i]->stopRecording(); }
 
 	for (int i = 0; i < spkMons.size(); i++) { spkMons[i]->print(); }

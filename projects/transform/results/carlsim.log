@@ -5,7 +5,7 @@
 [INFO carlsim/kernel/src/snn_manager.cpp:2027] ***************************** Configuring Network ********************************
 [INFO carlsim/kernel/src/snn_manager.cpp:2029] Starting CARLsim simulation "transform" in USER mode
 [INFO carlsim/kernel/src/snn_manager.cpp:2030] Random number seed: 42
-[DEBUG carlsim/kernel/src/snn_manager.cpp:2037] Current local time and date: Wed Oct 30 13:28:59 2019
+[DEBUG carlsim/kernel/src/snn_manager.cpp:2037] Current local time and date: Wed Oct 30 15:51:53 2019
 
 [DEBUG carlsim/kernel/src/snn_manager.cpp:166] CONNECT SETUP: connId=0, mulFast=1.000000, mulSlow=1.000000
 [DEBUG carlsim/kernel/src/snn_manager.cpp:166] CONNECT SETUP: connId=1, mulFast=1.000000, mulSlow=1.000000
@@ -114,8 +114,8 @@
 [INFO carlsim/kernel/src/print_snn_info.cpp:185]   |-+ Local Connection Id 2: output_0(3) => output_1(4)
 [INFO carlsim/kernel/src/print_snn_info.cpp:186]     |- Type                       =  PLASTIC
 [INFO carlsim/kernel/src/print_snn_info.cpp:187]     |- Min weight                 =  0.00000
-[INFO carlsim/kernel/src/print_snn_info.cpp:188]     |- Max weight                 =  0.10000
-[INFO carlsim/kernel/src/print_snn_info.cpp:189]     |- Initial weight             =  0.10000
+[INFO carlsim/kernel/src/print_snn_info.cpp:188]     |- Max weight                 =  0.20000
+[INFO carlsim/kernel/src/print_snn_info.cpp:189]     |- Initial weight             =  0.20000
 [INFO carlsim/kernel/src/print_snn_info.cpp:190]     |- Min delay                  =        1
 [INFO carlsim/kernel/src/print_snn_info.cpp:191]     |- Max delay                  =        1
 [INFO carlsim/kernel/src/print_snn_info.cpp:192]     |- Radius X                   =    -1.00
@@ -205,43 +205,75 @@
 [INFO carlsim/kernel/src/snn_manager.cpp:1217] SpikeMonitor set for group 3 (output_0)
 [INFO carlsim/kernel/src/snn_manager.cpp:1168] ConnectionMonitor 3 set for Connection 2: 3(output_0) => 4(output_1)
 [INFO carlsim/kernel/src/snn_manager.cpp:1217] SpikeMonitor set for group 4 (output_1)
-[DEBUG carlsim/kernel/src/snn_manager.cpp:798] runNetwork: runDur=1000ms, printRunSummary=y
+[DEBUG carlsim/kernel/src/snn_cpu_module.cpp:1975] copyExternalCurrent: lGrpId=0, ptrPos=0, length=1, allocate=n
+[DEBUG carlsim/kernel/src/snn_manager.cpp:798] runNetwork: runDur=10ms, printRunSummary=y
 [INFO carlsim/kernel/src/snn_manager.cpp:808] 
 [INFO carlsim/kernel/src/snn_manager.cpp:809] ******************** Running the simulation on 0 GPU(s) and 1 CPU(s) ***************************
 [INFO carlsim/kernel/src/snn_manager.cpp:810] 
-[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.000s) SpikeMonitor for group input_0(0) has 1 spikes in 1000ms (1.00 +/- 0.00 Hz)
-[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.000s) SpikeMonitor for group input_1(1) has 1 spikes in 1000ms (1.00 +/- 0.00 Hz)
-[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.000s) SpikeMonitor for group input_2(2) has 1 spikes in 1000ms (1.00 +/- 0.00 Hz)
-[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.000s) SpikeMonitor for group output_0(3) has 1 spikes in 1000ms (1.00 +/- 0.00 Hz)
-[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.000s) SpikeMonitor for group output_1(4) has 1 spikes in 1000ms (1.00 +/- 0.00 Hz)
-[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.000s) ConnectionMonitor ID=0 0(input_0) => 3(output_0): [preId,postId] wt (+/-wtChange in 1000ms) show first 100
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.010s) SpikeMonitor for group input_0(0) has 1 spikes in 10ms (100.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.010s) SpikeMonitor for group input_1(1) has 0 spikes in 10ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.010s) SpikeMonitor for group input_2(2) has 0 spikes in 10ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.010s) SpikeMonitor for group output_0(3) has 0 spikes in 10ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.010s) SpikeMonitor for group output_1(4) has 0 spikes in 10ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.010s) ConnectionMonitor ID=0 0(input_0) => 3(output_0): [preId,postId] wt (+/-wtChange in 10ms) show first 100
 [INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
-[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.000s) ConnectionMonitor ID=1 1(input_1) => 3(output_0): [preId,postId] wt (+/-wtChange in 1000ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.010s) ConnectionMonitor ID=1 1(input_1) => 3(output_0): [preId,postId] wt (+/-wtChange in 10ms) show first 100
 [INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
-[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.000s) ConnectionMonitor ID=3 2(input_2) => 4(output_1): [preId,postId] wt (+/-wtChange in 1000ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.010s) ConnectionMonitor ID=3 2(input_2) => 4(output_1): [preId,postId] wt (+/-wtChange in 10ms) show first 100
 [INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
-[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.000s) ConnectionMonitor ID=2 3(output_0) => 4(output_1): [preId,postId] wt (+/-wtChange in 1000ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.010s) ConnectionMonitor ID=2 3(output_0) => 4(output_1): [preId,postId] wt (+/-wtChange in 10ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.2000 (+0.0000)   
+[DEBUG carlsim/kernel/src/snn_cpu_module.cpp:1975] copyExternalCurrent: lGrpId=0, ptrPos=0, length=1, allocate=n
+[DEBUG carlsim/kernel/src/snn_cpu_module.cpp:1975] copyExternalCurrent: lGrpId=1, ptrPos=1, length=1, allocate=n
+[DEBUG carlsim/kernel/src/snn_manager.cpp:798] runNetwork: runDur=5ms, printRunSummary=y
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.015s) SpikeMonitor for group input_0(0) has 0 spikes in 5ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.015s) SpikeMonitor for group input_1(1) has 1 spikes in 5ms (200.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.015s) SpikeMonitor for group input_2(2) has 0 spikes in 5ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.015s) SpikeMonitor for group output_0(3) has 1 spikes in 5ms (200.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=0.015s) SpikeMonitor for group output_1(4) has 1 spikes in 5ms (200.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.015s) ConnectionMonitor ID=0 0(input_0) => 3(output_0): [preId,postId] wt (+/-wtChange in 15ms) show first 100
 [INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
-[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.000s) SpikeMonitor for group input_0(0) has 1 spikes in 1000 ms (1.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.015s) ConnectionMonitor ID=1 1(input_1) => 3(output_0): [preId,postId] wt (+/-wtChange in 15ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.015s) ConnectionMonitor ID=3 2(input_2) => 4(output_1): [preId,postId] wt (+/-wtChange in 15ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=0.015s) ConnectionMonitor ID=2 3(output_0) => 4(output_1): [preId,postId] wt (+/-wtChange in 15ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.2000 (+0.0000)   
+[DEBUG carlsim/kernel/src/snn_cpu_module.cpp:1975] copyExternalCurrent: lGrpId=1, ptrPos=1, length=1, allocate=n
+[DEBUG carlsim/kernel/src/snn_manager.cpp:798] runNetwork: runDur=1000ms, printRunSummary=y
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.015s) SpikeMonitor for group input_0(0) has 0 spikes in 1000ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.015s) SpikeMonitor for group input_1(1) has 0 spikes in 1000ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.015s) SpikeMonitor for group input_2(2) has 1 spikes in 1000ms (1.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.015s) SpikeMonitor for group output_0(3) has 0 spikes in 1000ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/kernel/src/print_snn_info.cpp:116] (t=1.015s) SpikeMonitor for group output_1(4) has 0 spikes in 1000ms (0.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.015s) ConnectionMonitor ID=0 0(input_0) => 3(output_0): [preId,postId] wt (+/-wtChange in 1015ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.015s) ConnectionMonitor ID=1 1(input_1) => 3(output_0): [preId,postId] wt (+/-wtChange in 1015ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.015s) ConnectionMonitor ID=3 2(input_2) => 4(output_1): [preId,postId] wt (+/-wtChange in 1015ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.1000 (+0.0000)   
+[INFO carlsim/monitor/connection_monitor_core.cpp:361] (t=1.015s) ConnectionMonitor ID=2 3(output_0) => 4(output_1): [preId,postId] wt (+/-wtChange in 1015ms) show first 100
+[INFO carlsim/monitor/connection_monitor_core.cpp:403] [0,0] 0.2000 (+0.0000)   
+[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.015s) SpikeMonitor for group input_0(0) has 1 spikes in 1015 ms (0.99 +/- 0.00 Hz)
 [INFO carlsim/monitor/spike_monitor_core.cpp:274] | Neur ID | Rate (Hz) | Spike Times (ms)
 [INFO carlsim/monitor/spike_monitor_core.cpp:275] |- - - - -|- - - - - -|- - - - - - - - - - - - - - - - -- - - - - - - - - - - - -
-[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      1.00 |        5
-[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.000s) SpikeMonitor for group input_1(1) has 1 spikes in 1000 ms (1.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      0.99 |        5
+[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.015s) SpikeMonitor for group input_1(1) has 1 spikes in 1015 ms (0.99 +/- 0.00 Hz)
 [INFO carlsim/monitor/spike_monitor_core.cpp:274] | Neur ID | Rate (Hz) | Spike Times (ms)
 [INFO carlsim/monitor/spike_monitor_core.cpp:275] |- - - - -|- - - - - -|- - - - - - - - - - - - - - - - -- - - - - - - - - - - - -
-[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      1.00 |       10
-[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.000s) SpikeMonitor for group input_2(2) has 1 spikes in 1000 ms (1.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      0.99 |       10
+[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.015s) SpikeMonitor for group input_2(2) has 1 spikes in 1015 ms (0.99 +/- 0.00 Hz)
 [INFO carlsim/monitor/spike_monitor_core.cpp:274] | Neur ID | Rate (Hz) | Spike Times (ms)
 [INFO carlsim/monitor/spike_monitor_core.cpp:275] |- - - - -|- - - - - -|- - - - - - - - - - - - - - - - -- - - - - - - - - - - - -
-[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      1.00 |       15
-[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.000s) SpikeMonitor for group output_0(3) has 1 spikes in 1000 ms (1.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      0.99 |       15
+[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.015s) SpikeMonitor for group output_0(3) has 1 spikes in 1015 ms (0.99 +/- 0.00 Hz)
 [INFO carlsim/monitor/spike_monitor_core.cpp:274] | Neur ID | Rate (Hz) | Spike Times (ms)
 [INFO carlsim/monitor/spike_monitor_core.cpp:275] |- - - - -|- - - - - -|- - - - - - - - - - - - - - - - -- - - - - - - - - - - - -
-[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      1.00 |       14
-[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.000s) SpikeMonitor for group output_1(4) has 1 spikes in 1000 ms (1.00 +/- 0.00 Hz)
+[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      0.99 |       11
+[INFO carlsim/monitor/spike_monitor_core.cpp:270] (t=1.015s) SpikeMonitor for group output_1(4) has 1 spikes in 1015 ms (0.99 +/- 0.00 Hz)
 [INFO carlsim/monitor/spike_monitor_core.cpp:274] | Neur ID | Rate (Hz) | Spike Times (ms)
 [INFO carlsim/monitor/spike_monitor_core.cpp:275] |- - - - -|- - - - - -|- - - - - - - - - - - - - - - - -- - - - - - - - - - - - -
-[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      1.00 |       19
+[INFO carlsim/monitor/spike_monitor_core.cpp:298] |       0 |      0.99 |       14
 [INFO carlsim/kernel/src/snn_manager.cpp:6550] 
 
 [INFO carlsim/kernel/src/snn_manager.cpp:6551] ********************    Simulation Summary      ***************************
